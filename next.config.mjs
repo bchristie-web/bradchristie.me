@@ -23,19 +23,21 @@ const nextConfig = async (phase, { defaultConfig }) => {
   };
 
   switch (phase) {
+    case PHASE_PRODUCTION_BUILD:
+      /** @type {import('next').NextConfig} */
+      const prodConfig = {
+        ...sharedConfig,
+        unoptimized: true,
+      };
+      return prodConfig;
     case PHASE_DEVELOPMENT_SERVER:
+    default:
       /** @type {import('next').NextConfig} */
       const devConfig = {
         ...sharedConfig,
       };
       return devConfig;
-    default:
-      /** @type {import('next').NextConfig} */
-      const prodConfig = {
-        ...sharedConfig,
-      };
-      return prodConfig;
   }
-};
+}
 
 export default nextConfig;
